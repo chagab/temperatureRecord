@@ -1,0 +1,102 @@
+ul {
+  list-style-type: none;
+  font-family: Verdana, sans-serif;
+}
+/* Month header */
+.month {
+  padding-top: 70px;
+  padding-bottom: 70px;
+  /* width: 100%; */
+  background: #1abc9c;
+  text-align: center;
+}
+
+.last-month,
+.next-month {
+  color: #ddd !important;
+}
+/* Month list */
+.month ul {
+  margin: 0;
+  padding: 0;
+}
+
+.month ul li {
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+/* Previous button inside month header */
+.month .prev {
+  float: left;
+  padding-top: 10px;
+  padding-left: 10px;
+  cursor: pointer;
+}
+/* Next button */
+.month .next {
+  float: right;
+  padding-top: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+/* Weekdays (Mon-Sun) */
+.weekdays {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0;
+  padding: 10px 0;
+  background-color: #ddd;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 13.6%;
+  color: #666;
+  text-align: center;
+  cursor: pointer;
+}
+/* Days (1-31) */
+.days {
+  justify-content: center !important;
+  background: #eee;
+  margin: 0;
+  padding: 0;
+}
+
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  width: 13.6%;
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+/* Highlight the "current" day */
+.active {
+  background: #1abc9c;
+  color: white !important;
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+  /* update .month padding for this middle screen size */
+  .month {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background: #1abc9c;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 768px) {
+  /* update .month padding for this small screen size */
+  .month {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #1abc9c;
+    text-align: center;
+  }
+}

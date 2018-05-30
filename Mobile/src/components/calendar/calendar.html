@@ -1,0 +1,17 @@
+<div class="month">
+  <ul>
+    <li class="prev" (click)="onPreviousMonth()">&#10094;</li>
+    <li class="next" (click)="onNexMonth()">&#10095;</li>
+    <li>{{ month() }}<br><span style="font-size:18px">{{ year() }}</span></li>
+  </ul>
+</div>
+
+<ul class="weekdays">
+  <li *ngFor="let day of daysLabel()"> {{ day }} </li>
+</ul>
+
+<ul class="days">
+  <li *ngFor="let i of days()" [class.active]="i === activeDay()" (click)="onDayClick(i)">{{ i }}</li>
+</ul>
+
+<!-- routerLink="/date/{{ date() }}" -->
