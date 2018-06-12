@@ -1,5 +1,5 @@
 import { Component, OnInit, Input /*, OnChanges */ } from '@angular/core';
-//import { Temperature } from './temperature';
+import { GetTemperatureService } from '../get-temperature.service';
 import * as Plotly from 'plotly.js';
 
 @Component({
@@ -105,7 +105,7 @@ export class TemperatureComponent implements OnInit /*, OnChanges */ {
     }
   };
 
-  constructor() { }
+  constructor(private temperatureService: GetTemperatureService) { }
 
   public ngOnInit(): void {
     // get the div wihch id is "plot" to plot temperature record
@@ -144,15 +144,16 @@ export class TemperatureComponent implements OnInit /*, OnChanges */ {
 
   private getTemperature(): any {
     // TODO: change this function to get data and not generate them !
-    let t = {};
-    for (let i = 0; i < 60; i++) {
-      if (i < 10) {
-        t[`23:44:0${i}`] = 23 + (Math.random() * 2) - 1;
-      } else {
-        t[`23:44:${i}`] = 23 + (Math.random() * 2) - 1;
-      }
-    }
-    return t;
+    // let t = {};
+    // for (let i = 0; i < 60; i++) {
+    //   if (i < 10) {
+    //     t[`23:44:0${i}`] = 23 + (Math.random() * 2) - 1;
+    //   } else {
+    //     t[`23:44:${i}`] = 23 + (Math.random() * 2) - 1;
+    //   }
+    // }
+    // return t; 
+    return this.temperatureService.getTemperature();
   }
 
   // TODO: check these two functions if they indeed compute a sliding average
