@@ -7,10 +7,12 @@ export class GetTemperatureService {
 
   client: any;
 
-  constructor() { }
+  constructor() {
+    this.connectToDataBase();
+  }
 
 
-  public ngOnInit(): void {
+  public connectToDataBase(): void {
     // setting up redis connection parameters
     const url = '127.0.0.1';
     const port = 6379;
@@ -37,7 +39,7 @@ export class GetTemperatureService {
     });
   }
 
-  public getTemperature(): any {
+  public getTemperature(): Number {
     return this.client.get("05/06/2018-15:32:11-A0");
   }
 }
