@@ -1,7 +1,12 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 //import { TemperatureComponent } from '../temperature/temperature.component';
+<<<<<<< HEAD
 // UN COMMENTAIRE SUPER UTILE
 // UN AUTRE COMMENTAIRE SUPER UTILE
+=======
+//Un commentaire
+//Un autre commentaire
+>>>>>>> max-branch
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.html',
