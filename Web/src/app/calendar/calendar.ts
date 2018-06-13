@@ -1,8 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 //import { TemperatureComponent } from '../temperature/temperature.component';
 
-//nettoyage de commentaires
-
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.html',
