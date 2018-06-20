@@ -6,15 +6,10 @@ import { catchError, map, tap } from 'rxjs/operators';
 @Injectable()
 export class GetTemperatureService {
 
-  temperatureURL: "130.120.230.169/query";
+  client: any;
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
-  public getTemperature(dateScan): Observable<any> {
-    return this.http.get<any>(this.temperatureURL)
-      .pipe(
-        tap(heroes => console.log(`fetched heroes`))
-      );
-  }
+  public getTemperature(): any { }
 
 }

@@ -153,7 +153,7 @@ export class TemperatureComponent implements OnInit /*, OnChanges */ {
       }
     }
     return t;
-    //return this.temperatureService.getTemperature("*");
+    // return this.temperatureService.getTemperature();
   }
 
   // TODO: check these two functions if they indeed compute a sliding average

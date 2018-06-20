@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+//import { redis } from 'redis';
 //import { TemperatureComponent } from '../temperature/temperature.component';
-// UN COMMENTAIRE SUPER UTILE
-// UN AUTRE COMMENTAIRE SUPER UTILE
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.html',
