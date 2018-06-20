@@ -36,3 +36,9 @@ smtpTransport.sendMail(mailOptions, function(error, response) {
 	}
 	smtpTransport.close();
 });
+
+/////////////
+// exports //
+/////////////
+module.export.smtpTransport = smtpTransport;
+module.export.mailOptions = mailOptions;

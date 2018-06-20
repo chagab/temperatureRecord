@@ -152,8 +152,8 @@ export class TemperatureComponent implements OnInit /*, OnChanges */ {
     //     t[`23:44:${i}`] = 23 + (Math.random() * 2) - 1;
     //   }
     // }
-    // return t; 
-    return this.temperatureService.getTemperature();
+    // return t;
+    return this.temperatureService.getTemperature("*");
   }
 
   // TODO: check these two functions if they indeed compute a sliding average
