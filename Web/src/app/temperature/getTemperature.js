@@ -1,40 +1,38 @@
 // import needed library
 const redis = require('redis');
-const {
-	promisify
-} = require('util');
+const { promisify } = require('util');
 
 // setting up redis connection parameters
 const url = '127.0.0.1';
 const port = 6379;
 
-// create client
-const client = redis.createClient(port, url);
+// create client 
+const client = redis.createClient(port, url); 
 
-// promisify useful function !
+// promisify useful function ! 
 const getAsync = promisify(client.get).bind(client);
-const mgetAsync = promisify(client.mget).bind(client);
-const keysAsync = promisify(client.keys).bind(client);
+const mgetAsync = promisify(client.mget).bind(client); 
+const keysAsync = promisify(client.keys).bind(client); 
 
 
 client.on('connect', (err) => {
-	if (err) {
+	if(err){
 		throw err;
 	} else {
-		console.log('connected to redis');
+		console.log('connected to redis'); 
 	}
-});
+}); 
 
 client.on('ready', (err) => {
-	if (err) {
-		throw err;
+	if(err) {
+		throw err; 
 	} else {
-		console.log('redis is ready to use');
+		console.log('redis is ready to use'); 
 	}
-});
+}); 
 
 client.on('end', (err) => {
-	console.log('ready is disconnected');
+	console.log('ready is disconnected'); 
 });
 
 
@@ -43,7 +41,7 @@ client.on('end', (err) => {
 
 async function getValueByKey(key) {
 	const res = await getAsync(key);
-	return res;
+	return res; 
 }
 
 async function getKeys(keys) {
@@ -53,7 +51,7 @@ async function getKeys(keys) {
 
 async function getValuesByKeys(keys) {
 	const res = await mgetAsync(keys);
-	return res;
+	return res; 
 }
 
 // example of getting all the temperature data from the pin A1

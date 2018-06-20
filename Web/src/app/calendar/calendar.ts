@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+//import { redis } from 'redis';
 //import { TemperatureComponent } from '../temperature/temperature.component';
 
 @Component({
