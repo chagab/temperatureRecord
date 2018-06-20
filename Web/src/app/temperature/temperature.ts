@@ -144,16 +144,16 @@ export class TemperatureComponent implements OnInit /*, OnChanges */ {
 
   private getTemperature(): any {
     // TODO: change this function to get data and not generate them !
-    // let t = {};
-    // for (let i = 0; i < 60; i++) {
-    //   if (i < 10) {
-    //     t[`23:44:0${i}`] = 23 + (Math.random() * 2) - 1;
-    //   } else {
-    //     t[`23:44:${i}`] = 23 + (Math.random() * 2) - 1;
-    //   }
-    // }
-    // return t;
-    return this.temperatureService.getTemperature("*");
+    let t = {};
+    for (let i = 0; i < 60; i++) {
+      if (i < 10) {
+        t[`23:44:0${i}`] = 23 + (Math.random() * 2) - 1;
+      } else {
+        t[`23:44:${i}`] = 23 + (Math.random() * 2) - 1;
+      }
+    }
+    return t;
+    //return this.temperatureService.getTemperature("*");
   }
 
   // TODO: check these two functions if they indeed compute a sliding average
