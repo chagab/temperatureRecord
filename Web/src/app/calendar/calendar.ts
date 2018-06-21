@@ -151,14 +151,9 @@ export class CalendarComponent implements OnInit {
 
   public onDayClick(dayNumber: number): void {
     // update the date !
-    let newDayString: string = dayNumber.toString();
-    // add a zero in front of the digit if it's smaller then 10
-    if (dayNumber < 10) {
-      newDayString = `0${dayNumber}`;
-    }
-    //this._date = this._date.slice(0, 8) + newDayString;
+    this._date = new Date(this._date.getFullYear(), this._date.getMonth(), dayNumber + 1);
     // change the active day on click
-    //this._activeDay = dayNumber;
+    this._activeDay = dayNumber;
     // trigger "_dateChanged" event
     this._dateChanged.emit(this._date.toISOString().slice(0, 10));
   }
