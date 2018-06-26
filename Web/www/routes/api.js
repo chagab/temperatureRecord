@@ -17,11 +17,12 @@ const getAsync = promisify(client.get).bind(client);
 async function getTemperature(dateScan) {
 	const keys = await scanAsync('0', 'MATCH', dateScan, 'COUNT', '1000');
 	const values = await mgetAsync(keys[1]);
-	return values;
+	return { date : keys[1], temperatures: values };
 }
 
 router.get('/:day-:month-:year-:hour-:minute-:second-:pin', (req, res) => {
 	// the parameters from the url are stored
+	console.log("in router.get");
 	const day = req.params.day;
 	const month = req.params.month;
 	const year = req.params.year;
@@ -41,4 +42,4 @@ router.get('/:day-:month-:year-:hour-:minute-:second-:pin', (req, res) => {
 	}) ;
 });
 
-module.exports = router; 
+module.exports = router;

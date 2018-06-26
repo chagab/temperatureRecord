@@ -16,7 +16,7 @@ function today(d) {
 // for the current time
 // d is a date object
 function timeNow(d) {
-	return ((d.getHours() < 10) ? "0" : "") + d.getHours() + ":" + ((d.getMinutes() < 10) ? "0" : "") + d.getMinutes() + ":" + ((d.getSeconds() < 10) ? "0" : "") + d.getSeconds();
+	return ((d.getUTCHours() < 10) ? "0" : "") + d.getUTCHours() + ":" + ((d.getUTCMinutes() < 10) ? "0" : "") + d.getUTCMinutes() + ":" + ((d.getUTCSeconds() < 10) ? "0" : "") + d.getUTCSeconds();
 }
 
 
@@ -65,7 +65,7 @@ client.on('connect', (err) => {
 			// then we declare the work to be done
 			work: function(my) {
 				// every seconde ...
-				every((1).second(), function() {
+				every((300).second(), function() {
 					// we create an empty array that will contain the temperature data
 					let temperatures = [];
 					// for each pin ...
@@ -83,7 +83,6 @@ client.on('connect', (err) => {
 						const key = `${today(d)}-${timeNow(d)}-A${pin}`;
 						client.set(key, temperature, redis.print);
 					}
-					console.log(temperatures);
 				});
 			}
 		}).start();
@@ -97,3 +96,4 @@ client.on('disconnect', (err) => {
 		console.log('Disconnect from Redis');
 	}
 });
+
