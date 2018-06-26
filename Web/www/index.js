@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+require('./getTemperature');
 
 // Get the API routes
 const api = require('./routes/api');
@@ -29,6 +30,22 @@ app.use('/api', api);
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
+
+app.get('/query', (req, res) => {
+	// Query your redis dataset here
+	console.log(req);
+	// client.get('data', (err, reply) => {
+	// 	// Handle errors if they occur
+	// 	if (err) {
+	// 		throw err;
+	// 		res.status(500).end();
+	// 	} else { // You could send a string
+	// 		res.send(reply.toString());
+	// 	}
+	// 	// or json
+	// 	// res.json({ data: reply.toString() });
+	// });
 });
 
 app.set('port', port);

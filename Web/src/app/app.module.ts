@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
 import { CalendarComponent } from './calendar/calendar';
 import { TemperatureComponent } from './temperature/temperature';
+
 
 
 @NgModule({
@@ -14,9 +16,13 @@ import { TemperatureComponent } from './temperature/temperature';
     TemperatureComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

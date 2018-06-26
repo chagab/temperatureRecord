@@ -7,22 +7,21 @@ const numberOfSensor = 6;
 // const tls = require('tls');
 // const fs = require('fs');
 
-// for the current date
-// d is a date object
+// create client for the database
+const client = redis.createClient(port, url, {
+	no_ready_check: true
+});
+
+// for the current date. Note that d is a date object
 function today(d) {
 	return ((d.getDate() < 10) ? "0" : "") + d.getDate() + "/" + (((d.getMonth() + 1) < 10) ? "0" : "") + (d.getMonth() + 1) + "/" + d.getFullYear();
 }
 
-// for the current time
-// d is a date object
+// for the current time. Note d is a date object
 function timeNow(d) {
 	return ((d.getUTCHours() < 10) ? "0" : "") + d.getUTCHours() + ":" + ((d.getUTCMinutes() < 10) ? "0" : "") + d.getUTCMinutes() + ":" + ((d.getUTCSeconds() < 10) ? "0" : "") + d.getUTCSeconds();
 }
 
-
-const client = redis.createClient(port, url, {
-	no_ready_check: true
-});
 
 // client.auth(null, function(err) {
 //      if (err) throw err;
@@ -49,7 +48,7 @@ client.on('connect', (err) => {
 			},
 			// For this work we are using TMP36 sensor
 			// initialize all the used pins
-			devices: (function() {
+			devices: (() => {
 				// we create an empty object ...
 				let res = {};
 				// to which we add every pin object
@@ -61,9 +60,8 @@ client.on('connect', (err) => {
 				}
 				return res;
 			})(),
-
 			// then we declare the work to be done
-			work: function(my) {
+			work: (my) => {
 				// every seconde ...
 				every((300).second(), function() {
 					// we create an empty array that will contain the temperature data
