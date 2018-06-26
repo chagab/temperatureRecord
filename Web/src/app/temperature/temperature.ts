@@ -69,9 +69,7 @@ export class TemperatureComponent implements OnInit /*, OnChanges */ {
     //   }
     // }
     // return t;
-    console.log('in getTemperature');
     const data = this.temperatureService.getTemperature(this._date);
-    console.log(data);
     return data;
   }
 
