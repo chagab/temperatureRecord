@@ -17,7 +17,11 @@ const getAsync = promisify(client.get).bind(client);
 async function getTemperature(dateScan) {
 	const keys = await scanAsync('0', 'MATCH', dateScan, 'COUNT', '1000');
 	const values = await mgetAsync(keys[1]);
-	return { date : keys[1], temperatures: values };
+	let res = {};
+	for(let i = 0; i < keys[1].length; i++){
+		res[keys[1][i]] = values[i];
+	}
+	return res;
 }
 
 router.get('/:day-:month-:year-:hour-:minute-:second-:pin', (req, res) => {
@@ -32,14 +36,20 @@ router.get('/:day-:month-:year-:hour-:minute-:second-:pin', (req, res) => {
 	const pin = req.params.pin;
 	// create the regex
 	const dateScan = `${day}/${month}/${year}-${hour}:${minute}:${second}-${pin}`;
+	console.log(dateScan);
 	// ask the database for temperature
-	getTemperature(dateScan).then( temperatures => {
-		// if temperatures match the regex, they are send to the client
-		res.send(temperatures);
-	}).catch(err => {
-		// otherwise, an error is send
-		res.end(err);
-	}) ;
+	getTemperature(dateScan)
+		.then( temperatures => {
+			// if temperatures match the regex, they are send to the client
+			res.send(temperatures);
+		})
+		.catch(err => {
+			// otherwise, an error is send
+			//res.end(err);
+			console.log(err); 
+			// otherwise send an empty array
+			return []; 
+		}) ;
 });
 
 module.exports = router;

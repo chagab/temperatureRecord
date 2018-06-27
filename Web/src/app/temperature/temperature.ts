@@ -38,14 +38,14 @@ export class TemperatureComponent implements OnInit /*, OnChanges */ {
 
   }
 
-  private plotTemperature(): void {
-    this.processTemperature();
-    Plotly.plot(this._plot, this._data, this._layout);
-  }
+  //private plotTemperature(): void {
+  //this.processTemperature();
+  //Plotly.plot(this._plot, this._data, this._layout);
+  //}
 
-  private processTemperature(): void {
+  private processTemperature(data): void {
     // fetched the data for the current "_date " attribute
-    const data = this.getTemperature();
+    //const data = this.getTemperature();
     // extract time from the data
     const time = Object.keys(data)/*.map(x => +x.slice(6, 9))*/;
     // extract temperature variation from the data
@@ -59,18 +59,10 @@ export class TemperatureComponent implements OnInit /*, OnChanges */ {
   }
 
   private getTemperature(): any {
-    // TODO: change this function to get data and not generate them !
-    // let t = {};
-    // for (let i = 0; i < 60; i++) {
-    //   if (i < 10) {
-    //     t[`23:44:0${i}`] = 23 + (Math.random() * 2) - 1;
-    //   } else {
-    //     t[`23:44:${i}`] = 23 + (Math.random() * 2) - 1;
-    //   }
-    // }
-    // return t;
-    const data = this.temperatureService.getTemperature(this._date);
-    return data;
+    this.temperatureService.getTemperature(this._date).subscribe(data => {
+      this.processTemperature(data);
+      Plotly.plot(this._plot, this._data, this._layout);
+    });
   }
 
   // TODO: check these two functions if they indeed compute a sliding average
@@ -89,6 +81,6 @@ export class TemperatureComponent implements OnInit /*, OnChanges */ {
     // change the "_date" attribute when user click in DateComponent
     this._date = date;
     // plot the new data
-    this.plotTemperature();
+    this.getTemperature();
   }
 }

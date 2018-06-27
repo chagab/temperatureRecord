@@ -63,7 +63,7 @@ client.on('connect', (err) => {
 			// then we declare the work to be done
 			work: (my) => {
 				// every seconde ...
-				every((300).second(), function() {
+				every((1).second(), function() {
 					// we create an empty array that will contain the temperature data
 					let temperatures = [];
 					// for each pin ...
