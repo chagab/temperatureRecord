@@ -1,8 +1,11 @@
+require("./fifo.js");
 const redis = require('redis');
 const Cylon = require("cylon");
 const port = 6379;
 const url = '127.0.0.1';
 const numberOfSensor = 6;
+const check = new FIFO(6, 10); 
+
 // TODO: implement a secure connection
 // const tls = require('tls');
 // const fs = require('fs');
@@ -80,7 +83,12 @@ client.on('connect', (err) => {
 						const d = new Date();
 						const key = `${today(d)}-${timeNow(d)}-A${pin}`;
 						client.set(key, temperature, redis.print);
+						// add values to the fifo
+						check.push(pin, temperature); 
 					}
+					check.update(); 
+					console.log(check);  
+
 				});
 			}
 		}).start();

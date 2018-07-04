@@ -84,3 +84,5 @@ export class TemperatureComponent implements OnInit /*, OnChanges */ {
     this.getTemperature();
   }
 }
+ 
+
