@@ -19,8 +19,66 @@ export class TemperatureComponent implements OnInit /*, OnChanges */ {
   private _data: any;
   // "_plot" contains the DOM element to plot in
   private _plot: HTMLElement;
+  // "_pins" contains all the pins number to get data from
+  private _pins: number[] = [0, 1, 2, 3, 4, 5];
   // "_layout" contains the layout of the plot
-  private _layout: any = new Layout()._layout;
+  private _layout: any = {
+    title: "Temperature (°C)",
+    gridcolor: "#666",
+    paper_bgcolor: "#eee",
+    plot_bgcolor: "#eee",
+    zeroline: true,
+    font: {
+      "family": "\"Open Sans\", verdana, arial, sans-serif"
+    },
+    titlefont: {
+      color: "#666",
+      size: 20
+    },
+    margin: {
+      l: 70,
+      r: 50,
+      t: 100,
+      b: 200,
+    },
+
+    xaxis: {
+      autorange: true,
+      title: "date",
+      gridcolor: "#ddd",
+      zeroline: true,
+      titlefont: {
+        color: "#666",
+        family: "Verdana, Arial, sans-serif",
+        size: 14
+      },
+      rangeselector: {
+        buttons: [
+          {
+            label: "month",
+            stepmode: 'backward'
+          },
+          {
+            label: "week",
+            stepmode: 'backward'
+          },
+          {
+            step: 'all'
+          }
+        ]
+      },
+      rangeslider: { range: ['2015-02-17', '2017-02-16'] },
+    },
+    yaxis: {
+      autorange: true,
+      title: "Temperature (C)",
+      type: 'linear',
+      gridcolor: "#ddd",
+      tickfont: {
+        color: "#666"
+      },
+    },
+  };
 
   constructor(private temperatureService: GetTemperatureService) { }
 
@@ -64,18 +122,7 @@ export class TemperatureComponent implements OnInit /*, OnChanges */ {
       Plotly.plot(this._plot, this._data, this._layout);
     });
   }
-
-  // TODO: check these two functions if they indeed compute a sliding average
-  // taken from https://stackoverflow.com/questions/12636613/how-to-calculate-moving-average-without-keeping-the-count-and-data-total
-  private calcNormalAvg(list) {
-    // sum(list) / len(list)
-    return list.reduce((a, b) => a + b) / list.length;
-  }
-
-  private calcRunningAvg(previousAverage, currentNumber, index) {
-    // [ avg' * (n-1) + x ] / n
-    return (previousAverage * (index - 1) + currentNumber) / index;
-  }
+  
 
   public onDateChanged(date: string): void {
     // change the "_date" attribute when user click in DateComponent
@@ -83,6 +130,15 @@ export class TemperatureComponent implements OnInit /*, OnChanges */ {
     // plot the new data
     this.getTemperature();
   }
+
+  public setPin(value: number): void {
+    console.log(value);
+  }
+
+  public getPins(): number[] {
+    return this._pins;
+  }
+
 }
  
 
