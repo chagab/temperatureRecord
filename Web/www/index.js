@@ -1,16 +1,18 @@
+'use strict';
 // Get dependencies
 const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
-//require('./getTemperature');
-
 // Get the API routes
-const api = require('./routes/api');
-
+const api = require('./routes/api-temperature');
+const {
+	SERVER_PORT
+} = require('./parameters.js').server_parameters;
+// create app support
 const app = express();
 // Get port from environment and store in Express.
-const port = process.env.PORT || '8000';
+const port = process.env.PORT || SERVER_PORT;
 // Create HTTP server.
 const server = http.createServer(app);
 
@@ -32,23 +34,9 @@ app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-app.get('/query', (req, res) => {
-	// Query your redis dataset here
-	console.log(req);
-	// client.get('data', (err, reply) => {
-	// 	// Handle errors if they occur
-	// 	if (err) {
-	// 		throw err;
-	// 		res.status(500).end();
-	// 	} else { // You could send a string
-	// 		res.send(reply.toString());
-	// 	}
-	// 	// or json
-	// 	// res.json({ data: reply.toString() });
-	// });
-});
-
 app.set('port', port);
 
 // Listen on provided port, on all network interfaces.
-server.listen(port, () => console.log(`API running on http://130.120.230.169:${port}`));
+server.listen(port, () => {
+	console.log(`API running on http://130.120.230.169:${port}`)
+});

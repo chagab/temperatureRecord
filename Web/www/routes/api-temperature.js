@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router(); 
+const router = express.Router();
 const redis = require('redis');
 const {
 	promisify
@@ -18,7 +18,7 @@ async function getTemperature(dateScan) {
 	const keys = await scanAsync('0', 'MATCH', dateScan, 'COUNT', '1000');
 	const values = await mgetAsync(keys[1]);
 	let res = {};
-	for(let i = 0; i < keys[1].length; i++){
+	for (let i = 0; i < keys[1].length; i++) {
 		res[keys[1][i]] = values[i];
 	}
 	return res;
@@ -26,7 +26,6 @@ async function getTemperature(dateScan) {
 
 router.get('/:day-:month-:year-:hour-:minute-:second-:pin', (req, res) => {
 	// the parameters from the url are stored
-	console.log("in router.get");
 	const day = req.params.day;
 	const month = req.params.month;
 	const year = req.params.year;
@@ -36,20 +35,19 @@ router.get('/:day-:month-:year-:hour-:minute-:second-:pin', (req, res) => {
 	const pin = req.params.pin;
 	// create the regex
 	const dateScan = `${day}/${month}/${year}-${hour}:${minute}:${second}-${pin}`;
-	console.log(dateScan);
 	// ask the database for temperature
 	getTemperature(dateScan)
-		.then( temperatures => {
+		.then(temperatures => {
 			// if temperatures match the regex, they are send to the client
 			res.send(temperatures);
 		})
 		.catch(err => {
 			// otherwise, an error is send
 			//res.end(err);
-			console.log(err); 
+			console.log(err);
 			// otherwise send an empty array
-			return []; 
-		}) ;
+			return [];
+		});
 });
 
 module.exports = router;
