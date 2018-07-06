@@ -17,13 +17,13 @@ export class GetTemperatureService {
 
   constructor(private http: HttpClient) { }
 
-  public getTemperature(date: string) {
+  public getTemperature(date: string, pin: number) {
     // extract parameters from the date string
     const year = date.slice(0, 4);
     const month = date.slice(5, 7);
     const day = date.slice(8, 11);
     // create the regex
-    const dateScan = `${this.url}:${this.port}${this.route}${day}-${month}-${year}-*-*-*-A2`;
+    const dateScan = `${this.url}:${this.port}${this.route}${day}-${month}-${year}-*-*-*-A${pin}`;
     return this.http.get(dateScan)
       .map((res: Response) => res.json());
   }
