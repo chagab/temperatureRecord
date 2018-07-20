@@ -1,9 +1,3 @@
-//////////////////////////////////////////////////////////////////////////////
-// This script is for creating a javascript object that will be passed to 	//
-// cylon to launch the storing process. This is done by the "makeConnexion"	//
-// function 																																//
-//////////////////////////////////////////////////////////////////////////////
-
 'use strict';
 const redis = require('redis');
 const mail = require('./mail-alert');
@@ -40,8 +34,8 @@ function initializePin() {
 	return res;
 }
 
-// function that store the temperature and check for unusual behavior
-function storeTemperature(sensors, dataBase) {
+// function that display the temperature
+function displayTemperature(sensors) {
 	for (let pin = 0; pin < NUMBER_OF_SENSOR; pin++) {
 		// we get the analog value that is read
 		const analogValue = sensors[`a${pin}`].analogRead();
@@ -51,12 +45,12 @@ function storeTemperature(sensors, dataBase) {
 		const temperature = (voltage - 0.5) * 100;
 		// we insert the value into the database
 		const d = new Date();
-		const key = d.toISOString().replace('T', ' ') + `-A${pin}`;
-		dataBase.set(key, temperature, redis.print);
+		const key = `${today(d)}-${timeNow(d)}-A${pin}`;
+		console.log(key, temperature);
 		// add values to the fifo
-		checkObject[`A${pin}`].push(temperature);
+		//checkObject[`A${pin}`].push(temperature);
 	}
-	checkTemperature(checkObject);
+	//checkTemperature(checkObject);
 }
 
 // function that uses the check object
@@ -65,7 +59,7 @@ function checkTemperature() {
 		if (checkObject[pin].length >= TIME_INTERVAL) {
 			const meanOfPin = mean(checkObject[pin]);
 			if (meanOfPin > UPPER_BOUND || meanOfPin < LOWER_BOUND) {
-				sendAlert();
+			       //sendAlert();
 			} else {
 				checkObject[pin].shift()
 			}
@@ -91,7 +85,33 @@ function mean(array) {
 	return array.reduce((p, c) => p + c, 0) / array.length;
 }
 
-module.exports.makeConnexion = function(dataBase) {
+// function that return the current date with the form "dd/mm/yyyy"
+function today(date) {
+	return (
+		// the current day string : "dd/"
+		((date.getDate() < 10) ? "0" : "") + date.getDate() + "/" +
+		// the current month string : "mm/"
+		(((date.getMonth() + 1) < 10) ? "0" : "") + (date.getMonth() + 1) + "/" +
+		// the current year number : yyyy
+		date.getFullYear()
+	);
+}
+
+// function that return the current time with the form "hh:mm:ss"
+function timeNow(date) {
+	return (
+		// the current hour string : "hh:"
+		((date.getHours() < 10) ? "0" : "") + date.getHours() + ":" +
+		// the current minute string : "mm:"
+		((date.getMinutes() < 10) ? "0" : "") + date.getMinutes() + ":" +
+		// the current second string : "ss"
+		((date.getSeconds() < 10) ? "0" : "") + date.getSeconds()
+	);
+}
+
+
+
+checkTemperature = function() {
 	return {
 		connections: {
 			arduino: {
@@ -103,9 +123,14 @@ module.exports.makeConnexion = function(dataBase) {
 		work: (sensors) => {
 			// every specified time interval we store the temperature
 			// and check for anomalous behavior
-			every((TIME_INTERVAL).second(), () => {
-				storeTemperature(sensors, dataBase)
-			});
+			every((1).second(), () => {  
+					displayTemperature(sensors, dataBase)
+				}
+			);
 		}
 	};
 }
+
+console.log('checking temperature');
+checkTemperature();
+

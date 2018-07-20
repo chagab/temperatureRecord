@@ -1,80 +1,70 @@
-export class Layout {
-  _layout: any = {
-    "frames": [{
-      "layout": {
-        "autosize": true,
-        "title": "Temperature record",
-        "paper_bgcolor": "rgb(17,23,33)",
-        "plot_bgcolor": "rgb(18,25,36)",
-        "yaxis": {
-          "tickfont": {
-            "color": "rgb(187, 187, 187)"
-          },
-          "title": "Temperature (°C)",
-          "titlefont": {
-            "color": "rgb(187, 187, 187)",
-            "family": "Verdana, Arial, sans-serif",
-            "size": 14
-          },
-          "type": "linear",
-          "autorange": true
-        },
-        "titlefont": {
-          "color": "rgb(187, 187, 187)",
-          "size": 20
-        },
-        "xaxis": {
-          "tickfont": {
-            "color": "rgb(187, 187, 187)"
-          },
-          "title": "time (hours)",
-          "gridcolor": "rgb(187, 187, 187)",
-          "zeroline": true,
-          "titlefont": {
-            "color": "rgb(187, 187, 187)",
-            "family": "Verdana, Arial, sans-serif",
-            "size": 14
-          },
-          "type": "category",
-          "autorange": true,
-          "rangeselector": {
-            "buttons": [
-              {
-                "count": 1,
-                "label": '1m',
-                "step": 'month',
-                "stepmode": 'backward'
-              },
-              {
-                "count": 6,
-                "label": '6m',
-                "step": 'month',
-                "stepmode": 'backward'
-              },
-              { "step": 'all' }
-            ]
-          },
-          "rangeslider": { "range": ['2015-02-17', '2017-02-16'] },
-        },
-        "hovermode": "x",
-        "font": {
-          "family": "\"Open Sans\", verdana, arial, sans-serif"
-        },
-        "margin": {
-          "pad": 4,
-          "r": 50,
-          "b": 150,
-          "l": 70,
-          "t": 100
-        },
-        "legend": {
-          "font": {
-            "color": "rgb(187, 187, 187)"
-          }
-        }
-      },
-      "name": "workspace-breakpoint-0"
-    }]
+export const layout = {
+  title: "Temperature (°C)",
+  gridcolor: "#666",
+  paper_bgcolor: "#eee",
+  plot_bgcolor: "#eee",
+  zeroline: true,
+  font: {
+    "family": "\"Open Sans\", verdana, arial, sans-serif"
+  },
+  titlefont: {
+    color: "#666",
+    size: 20
+  },
+  margin: {
+    l: 70,
+    r: 50,
+    t: 100,
+    b: 200,
+  },
 
-  };
-}
+  xaxis: {
+    autorange: false,
+    type : 'date', 
+    title: "date",
+    gridcolor: "#ddd",
+    zeroline: true,
+    titlefont: {
+      color: "#666",
+      family: "Verdana, Arial, sans-serif",
+      size: 14
+    },
+    rangeselector: {
+    	visible: true, 
+	xanchor : 'center',
+	yanchor : 'top',
+    	buttons: 
+    	[
+      		{	
+	          count: 20,
+		  step: 'hour',
+        	  label: "1 hour",
+		  stepmode: 'backward'
+	        },
+		{
+	          count: 1,
+		  step : 'minute',
+        	  label: "1 minute",
+	          stepmode: 'backward'
+       		 },
+		 {
+		  label : 'all',
+        	  step: 'all'
+	         }
+      	]},
+     rangeslider: { 
+	 //range: ['2015-02-17', '2017-02-16'] 
+	 autorange : true,
+	 thickness : 0.2
+	},
+  },
+  yaxis: {
+    autorange: true,
+    title: "Temperature (C)",
+    type: 'linear',
+    gridcolor: "#ddd",
+    tickfont: {
+      color: "#666"
+    },
+  },
+};
