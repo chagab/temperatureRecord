@@ -25,8 +25,11 @@
     "body-parser": "^1.18.3",
     "core-js": "^2.4.1",
     "nodemailer": "^4.6.7",
+    "parser-readline": "^1.0.2",
     "plotly.js": "^1.37.1",
+    "redis": "^2.8.0",
     "rxjs": "^5.5.6",
+    "serialport": "^7.1.4",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
