@@ -5,6 +5,7 @@ const redis = require("redis"), client = redis.createClient();
 client.on("error", function (err) {
   console.log("Error " + err);
 });
+const multi = client.multi();
 
 const port = new SerialPort("/dev/ttyACM0", {baudRate: 9600});
 const parser = port.pipe(new Readline({delimiter: '\n'}));
@@ -20,10 +21,7 @@ port.on('open', function (err) {
 parser.on('data', function (data) {
   console.log(data);
   //TODO: connexion to redis
-  //client.set(new Date(Date.now()), "string val", redis.print);
-  // client.hset("hash key", "hashtest 1", "some value", redis.print);
-  // client.hset(["hash key", "hashtest 2", "some other value"], redis.print);
-  // client.hkeys("hash key", function (err, replies) {
-
-  // client.quit();
+  client.set(new Date(Date.now()), "string val", redis.print);
+  const result = client.rpush('test',4);
+  console.log(result);
 });
