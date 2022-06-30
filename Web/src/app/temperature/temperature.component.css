@@ -1,4 +1,4 @@
-host: {
+host {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,7 +18,6 @@ host: {
 }
 
 .pin {
-  display: inline-block;
   display: flex;
   justify-content: center;
   width: 16.6%;
