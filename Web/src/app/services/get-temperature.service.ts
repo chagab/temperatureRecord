@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import {EMPTY, Observable} from 'rxjs';
 
 @Injectable()
 export class GetTemperatureService {
@@ -10,10 +11,10 @@ export class GetTemperatureService {
 
   constructor(private http: HttpClient) { }
 
-  public getDataFromPinAtDate(pin: number, date: string) {
-    const year = date.slice(0, 4);
-    const month = date.slice(5, 7);
-    const day = date.slice(8, 11);
-    return this.http.get(`${this.API_URL}${day}-${month}-${year}-*-*-*-A${pin}`);
+  public getDataFromPinAtDate(pin: number, date: string): Observable<any> {
+    const params = new HttpParams();
+    params.appendAll({year: date.slice(0, 4), month: date.slice(5, 7), day: date.slice(8, 11), pin});
+    // return this.http.get(`${this.API_URL}`, {params});
+    return EMPTY;
     }
 }

@@ -1,33 +1,29 @@
-host {
+:host {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  height: 100%;
 }
 
-.center {
-  width: 100%;
+.header {
   display: flex;
-  justify-content: center;
+  padding: 1.25rem 0.5rem 0;
+  align-items: center;
+  box-shadow: 0 3px 5px -1px #0003,0 6px 10px #00000024,0 1px 18px #0000001f;
+  justify-content: space-between;
 }
 
-#pinSelector {
-  background-color: #ddd;
+.controllers {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.pin {
-  display: flex;
-  justify-content: center;
-  width: 16.6%;
-  font-family: Verdana , sans-serif;
-  padding: 5px;
-  margin: 5px;
-  background-color: #eee;
-  color: #666;
+  gap: 10px;
 }
 
 .pin:hover {
   cursor: pointer;
+}
+
+.charts-container {
+  padding: 1rem 0;
+  box-sizing: border-box;
+  height: calc(100% - 115px);
+  width: 100%;
 }

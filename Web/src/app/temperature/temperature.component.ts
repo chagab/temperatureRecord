@@ -2,20 +2,17 @@ import {Component, OnInit} from '@angular/core';
 import {GetTemperatureService} from '../services/get-temperature.service';
 import {layout} from './layout';
 
+type DataFormat = {name: string, series: {name: string, value: number}[]}[];
+
 @Component({
   selector: 'app-temperature',
   templateUrl: './temperature.component.html',
   styleUrls: ['./temperature.component.css'],
-  inputs: ['_date'],
   providers: [GetTemperatureService],
 })
-
-
 export class TemperatureComponent implements OnInit /*, OnChanges */ {
   // "_date" contains the date selected by the DateComponent
   private _date: string;
-  // "_data" contains the temperature record
-  private _data: any;
   // "_plot" contains the DOM element to plot in
   private _plot: HTMLElement;
   // "_pins" contains all the pins number to get data from
@@ -25,6 +22,36 @@ export class TemperatureComponent implements OnInit /*, OnChanges */ {
   private _activePin = 0;
   // "_layout" contains the layout of the plot
   private _layout: any = layout;
+
+
+  multi: DataFormat = [{
+    name: 'Germany',
+    series: [
+      {
+        'name': '2010',
+        'value': 7300000
+      },
+      {
+        'name': '2011',
+        'value': 8940000
+      }
+    ]
+  }];
+  view: [number, number] = [700, 300];
+  legend = true;
+  showLabels = true;
+  animations = true;
+  xAxis = true;
+  yAxis = true;
+  showYAxisLabel = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Date';
+  yAxisLabel = 'température';
+  timeline = true;
+
+  colorScheme = {
+    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+  };
 
   constructor(private temperatureService: GetTemperatureService) {
   }
@@ -44,11 +71,11 @@ export class TemperatureComponent implements OnInit /*, OnChanges */ {
   private processTemperature(data): void {
     const time = Object.keys(data);
     const temperature = Object.values(data);
-    this._data = [{
-      x: time,
-      y: temperature,
-      name: `${this._date} A${this._activePin}`
-    }];
+    // this.multi = [{
+    //   x: time,
+    //   y: temperature,
+    //   name: `${this._date} A${this._activePin}`
+    // }];
   }
 
   private getDataFromPinAtDate(): any {

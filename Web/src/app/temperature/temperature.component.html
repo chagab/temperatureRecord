@@ -1,5 +1,27 @@
-<app-calendar (_dateChanged)="onDateChanged($event)"></app-calendar>
-<div id="pinSelector">
-  <div *ngFor="let i of getPins()" id="pin{{ i }}" class="pin" (click)="setPin(i)"><label>Pin {{ i }}</label></div>
+<div class="header">
+  <h2> Temperatures </h2>
+  <div class="controllers">
+    <mat-form-field appearance="outline">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Choose a pin</mat-label>
+      <input matInput >
+    </mat-form-field>
+  </div>
 </div>
-<!--<div id="plot"></div>-->
+
+<div class="charts-container">
+  <ngx-charts-line-chart
+    [legend]="legend"
+    [xAxis]="xAxis"
+    [yAxis]="yAxis"
+    [timeline]="timeline"
+    [results]="multi"
+  >
+  </ngx-charts-line-chart>
+</div>
+
