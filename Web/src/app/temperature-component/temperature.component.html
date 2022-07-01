@@ -1,5 +1,5 @@
 <div class="header">
-  <h2> Temperatures </h2>
+  <h1> Temperatures </h1>
   <div class="controllers">
     <mat-form-field appearance="outline">
       <mat-label>Enter a date range</mat-label>
@@ -10,10 +10,10 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>select pins to display</mat-label>
       <mat-select [formControl]="pinsController" multiple>
-        <mat-option *ngFor="let pin of pins" [value]="pin">Pin {{pin}}</mat-option>
+        <mat-option *ngFor="let pin of pins$ | async" [value]="pin">{{pin}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
@@ -21,6 +21,7 @@
 
 <div class="charts-container">
   <ngx-charts-line-chart
+    *ngIf="multi; else selectValueDisplay"
     [legend]="legend"
     [xAxis]="xAxis"
     [yAxis]="yAxis"
@@ -29,4 +30,11 @@
   >
   </ngx-charts-line-chart>
 </div>
+
+<ng-template #selectValueDisplay>
+  <div class="no-data">
+    <h2>No data to display</h2>
+    <span>Select a <b>date range</b> and <b>pins</b> in order to display charts</span>
+  </div>
+</ng-template>
 

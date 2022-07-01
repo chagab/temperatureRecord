@@ -5,9 +5,12 @@
   "projects": {
     "web": {
       "root": "",
+      "sourceRoot": "src",
       "projectType": "application",
+      "prefix": "app",
       "architect": {
         "build": {
+          "defaultConfiguration": "development",
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist",
@@ -51,17 +54,25 @@
               ]
             },
             "dev": {
+              "optimization": true,
               "outputHashing": "all",
               "sourceMap": true,
+              "namedChunks": true,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true
+              "vendorChunk": true,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             }
           }
         },
         "serve": {
-          "defaultConfiguration": "development",
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "web:build"
@@ -73,6 +84,12 @@
             "dev": {
               "browserTarget": "web:build:dev"
             }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "angular-minimal-template-stable:build"
           }
         },
         "lint": {
@@ -89,5 +106,10 @@
         }
       }
     }
+  },
+  "defaultProject": "web",
+  "schematics":{
+    "@schematics/angular:component": {
+      "style": "scss" }
   }
 }

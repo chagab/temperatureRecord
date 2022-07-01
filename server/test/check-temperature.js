@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////////////
-// This script is for displaying the temepratures from the sensors directly //
-// It is aimed for debuging purpose 																				//
+// This script is for displaying the temperatures from the sensors directly //
+// It is aimed for debugging purpose 																				//
 // NOTE : the script store-temperature.js needs to be shut down for this 		//
 // script to work => simply run : "sudo service store-temperature stop" to	//
 // disable it 																															//
@@ -8,7 +8,7 @@
 
 'use strict';
 const redis = require('redis');
-const Cylon = require('cylon');
+const cylon = require('cylon');
 // create client for the database
 const client = redis.createClient(DATABASE_PORT, URL, {
 	no_ready_check: true
@@ -17,7 +17,7 @@ const client = redis.createClient(DATABASE_PORT, URL, {
 const {
 	DATABASE_PORT,
 	URL
-} = require('./parameters.js').dataBase_parameters;
+} = require('../src/parameters.js').dataBase_parameters;
 
 const {
 	ARDUINO_PORT,
@@ -26,7 +26,7 @@ const {
 	UPPER_BOUND,
 	LOWER_BOUND,
 	TIME_INTERVAL
-} = require('./parameters.js').arduino_parameters;
+} = require('../src/parameters.js').arduino_parameters;
 
 // function that initialize all the used pins
 function initializePin() {
@@ -59,7 +59,7 @@ function displayTemperature(sensors) {
 	}
 }
 
-checkTemperature = function() {
+function checkTemperature() {
 	return {
 		connections: {
 			arduino: {
@@ -78,13 +78,13 @@ checkTemperature = function() {
 	};
 }
 
-// on connect, create a connection betwenn the arduino and the database
+// on connect, create a connection between the arduino and the database
 client.on('connect', (err) => {
 	if (err) {
 		throw err;
 	} else {
 		console.log('Connected to Redis');
-		Cylon.robot(checkTemperature()).start();
+		cylon.robot(checkTemperature()).start();
 	}
 });
 
