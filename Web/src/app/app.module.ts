@@ -12,6 +12,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatNativeDateModule} from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ReactiveFormsModule} from '@angular/forms';
+import {GetFakeTemperatureService} from './services/get-fake-temperature.service';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -29,9 +32,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
   ],
   providers: [
-    GetTemperatureService
+    GetTemperatureService,
+    GetFakeTemperatureService
   ],
   bootstrap: [
     AppComponent
