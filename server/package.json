@@ -1,0 +1,25 @@
+{
+  "name": "temperature-record-server",
+  "version": "0.0.1",
+  "description": "A server used to retrieve and store data from pins, it can also deliver theses data via an endpoint",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hugo Delatte, Gabriel Chatelain",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "cylon": "^1.3.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "nodemailer": "^6.7.6",
+    "redis": "^4.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.19.0"
+  }
+}

@@ -1,0 +1,46 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  padding: 1.25rem 1.25rem 0;
+  align-items: center;
+  box-shadow: 0 3px 5px -1px #0003,0 6px 10px #00000024,0 1px 18px #0000001f;
+  justify-content: space-between;
+
+  .controllers {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.pin:hover {
+  cursor: pointer;
+}
+
+.charts-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  box-sizing: border-box;
+  height: calc(100% - 115px);
+  width: 100%;
+}
+
+.no-data {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: 0 3px 5px -1px #0003,0 6px 10px #00000024,0 1px 18px #0000001f;
+}
+
+h2, h1, .no-data b {
+  color: #673ab7;
+}
